@@ -190,28 +190,55 @@ const App = () => {
   const [totalHits, setTotalHits] = useState(0);
 
  
-  const getImages = async () => {
-    setIsLoading(true);
-    const options = { searchQuery, currentPage, pageSize };
+//   const getImages = async () => {
+//     setIsLoading(true);
+//     const options = { searchQuery, currentPage, pageSize };
 
-    try {
-      const { data } = await fetchImages(options);
-      setImages(prevImages => [...prevImages, ...data.hits]);
-      setTotalHits(data.totalHits);
-      setShowScroll(true);
-      setError(null);
-      handleMessages(data);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
+//     try {
+//       const { data } = await fetchImages(options);
+//       setImages(prevImages => [...prevImages, ...data.hits]);
+//       setTotalHits(data.totalHits);
+//       setShowScroll(true);
+//       setError(null);
+//       handleMessages(data);
+//     } catch (error) {
+//       setError(error);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+//  useEffect(() => {
+//     if (searchQuery !== '' || currentPage !== 1) {
+//      await getImages();
+//     }
+//   }, [searchQuery, currentPage]);
+  const getImages = async () => {
+  setIsLoading(true);
+  const options = { searchQuery, currentPage, pageSize };
+
+  try {
+    const { data } = await fetchImages(options);
+    setImages(prevImages => [...prevImages, ...data.hits]);
+    setTotalHits(data.totalHits);
+    setShowScroll(true);
+    setError(null);
+    handleMessages(data);
+  } catch (error) {
+    setError(error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+useEffect(() => {
+  const fetchData = async () => {
+    if (searchQuery !== '' || currentPage !== 1) {
+      await getImages();
     }
   };
- useEffect(() => {
-    if (searchQuery !== '' || currentPage !== 1) {
-      getImages();
-    }
-  }, [searchQuery, currentPage]);
+
+  fetchData();
+}, [searchQuery, currentPage]);
 
   const handleFormSubmit = newSearchQuery => {
     reset();
