@@ -190,29 +190,6 @@ const App = () => {
   const [totalHits, setTotalHits] = useState(0);
 
  
-//   const getImages = async () => {
-//     setIsLoading(true);
-//     const options = { searchQuery, currentPage, pageSize };
-
-//     try {
-//       const { data } = await fetchImages(options);
-//       setImages(prevImages => [...prevImages, ...data.hits]);
-//       setTotalHits(data.totalHits);
-//       setShowScroll(true);
-//       setError(null);
-//       handleMessages(data);
-//     } catch (error) {
-//       setError(error);
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-//  useEffect(() => {
-//     if (searchQuery !== '' || currentPage !== 1) {
-//      await getImages();
-//     }
-//   }, [searchQuery, currentPage]);
-useEffect(() => {
   const getImages = async () => {
     setIsLoading(true);
     const options = { searchQuery, currentPage, pageSize };
@@ -230,11 +207,11 @@ useEffect(() => {
       setIsLoading(false);
     }
   };
-
-  if (searchQuery !== '' || currentPage !== 1) {
-    getImages();
-  }
-}, [searchQuery, currentPage]); 
+ useEffect(() => {
+    if (searchQuery !== '' || currentPage !== 1) {
+      getImages();
+    }
+  }, [searchQuery, currentPage]);
 
   const handleFormSubmit = newSearchQuery => {
     reset();
