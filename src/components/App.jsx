@@ -188,7 +188,15 @@ const App = () => {
   const [modalDescr, setModalDescr] = useState(null);
   const [error, setError] = useState(INITIAL_STATE.error);
   const [totalHits, setTotalHits] = useState(0);
-
+  const totalPage = Math.ceil(totalHits / pageSize);
+  const handleMessages = data => {
+    if (data.totalHits !== 0 && currentPage === 1) {
+      onTotalImages(data.totalHits);
+    }
+    if (data.total === 0) {
+      return onFetchError();
+    }
+  };
  
 useEffect(() => {
   const getImages = async () => {
@@ -223,14 +231,7 @@ useEffect(() => {
     incrementCurrentPage();
   };
 
-  const handleMessages = data => {
-    if (data.totalHits !== 0 && currentPage === 1) {
-      onTotalImages(data.totalHits);
-    }
-    if (data.total === 0) {
-      return onFetchError();
-    }
-  };
+ 
 
   const handleModal = (imgDescr, img) => {
     setModalDescr(imgDescr);
@@ -259,7 +260,7 @@ useEffect(() => {
     setError(INITIAL_STATE.error);
   };
 
-  const totalPage = Math.ceil(totalHits / pageSize);
+ 
 
   return (
     <div className={css.App}>
