@@ -190,6 +190,7 @@ const App = () => {
   const [totalHits, setTotalHits] = useState(0);
 
  
+useEffect(() => {
   const getImages = async () => {
     setIsLoading(true);
     const options = { searchQuery, currentPage, pageSize };
@@ -207,11 +208,11 @@ const App = () => {
       setIsLoading(false);
     }
   };
- useEffect(() => {
-    if (searchQuery !== '' || currentPage !== 1) {
-      getImages();
-    }
-  }, [searchQuery, currentPage]);
+
+  if (searchQuery !== '' || currentPage !== 1) {
+    getImages();
+  }
+}, [searchQuery, currentPage]); 
 
   const handleFormSubmit = newSearchQuery => {
     reset();
