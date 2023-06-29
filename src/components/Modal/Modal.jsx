@@ -59,7 +59,7 @@ const Modal = ({ modalImg, modalDescry, onClick }) => {
 
   useEffect(() => {
     const onKeyDown = (e) => handleKeyDown(e);
-    const onBackdropClick = (e) => handleBackdropClick(e);
+    // const onBackdropClick = (e) => handleBackdropClick(e);
 
     window.addEventListener('keydown', onKeyDown);
     return () => {

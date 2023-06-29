@@ -188,6 +188,14 @@ const App = () => {
   const [totalHits, setTotalHits] = useState(0);
   const [pageSize, setPageSize] = useState(INITIAL_STATE.pageSize);
 
+   const handleMessages = (data) => {
+    if (data.totalHits !== 0 && currentPage === 1) {
+      onTotalImages(data.totalHits);
+    }
+    if (data.total === 0) {
+      return onFetchError();
+    }
+  };
   useEffect(() => {
     const getImages = async () => {
       setIsLoading(true);
@@ -223,14 +231,7 @@ const App = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  const handleMessages = (data) => {
-    if (data.totalHits !== 0 && currentPage === 1) {
-      onTotalImages(data.totalHits);
-    }
-    if (data.total === 0) {
-      return onFetchError();
-    }
-  };
+ 
 
   const handleModal = (descr, img) => {
     setModalDescr(descr);
