@@ -38,9 +38,9 @@ import { ReactComponent as CircleIcon } from '../Icons/circleUp.svg';
 import IconButton from '../Button/IconButton/IconButton';
 
 const ScrollToTop = () => {
-  const [isScroll, setIsScroll] = useState(false);
+  // const [setIsScroll] = useState(false);
   const startRef = useRef(null);
-  const scrollToRef = useRef(null);
+  // const scrollToRef = useRef(null);
 
   useEffect(() => {
     scrollToRef.current = startRef.current.offsetTop;
