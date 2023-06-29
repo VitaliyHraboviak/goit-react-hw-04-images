@@ -41,28 +41,31 @@
 //   }
 // }
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import css from './Modal.module.css';
 
 const Modal = ({ modalImg, modalDescry, onClick }) => {
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (e.code === 'Escape') {
       onClick();
     }
-  };
+  }, [onClick]);
 
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = useCallback((e) => {
     if (e.currentTarget === e.target) {
       onClick();
     }
-  };
+  }, [onClick]);
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    const onKeyDown = (e) => handleKeyDown(e);
+    const onBackdropClick = (e) => handleBackdropClick(e);
+
+    window.addEventListener('keydown', onKeyDown);
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', onKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, handleBackdropClick]);
 
   return (
     <div className={css.backdrop} onClick={handleBackdropClick}>

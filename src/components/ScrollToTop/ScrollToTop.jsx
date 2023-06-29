@@ -33,42 +33,49 @@
 //   }
 // }
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { ReactComponent as CircleIcon } from '../Icons/circleUp.svg';
 import IconButton from '../Button/IconButton/IconButton';
 
 const ScrollToTop = () => {
   const [isScroll, setIsScroll] = useState(false);
+  const startRef = useRef(null);
+  const scrollToRef = useRef(null);
+
+  useEffect(() => {
+    scrollToRef.current = startRef.current.offsetTop;
+  }, []);
 
   const scrollToTop = () => {
-    const start = document.querySelector('#header');
+    const start = scrollToRef.current;
     window.scrollTo({ top: start, behavior: 'smooth' });
   };
 
-  const handleScrollToTop = () => {
+  const handleScrollToTop = useCallback(() => {
     const GOLDEN_RATIO = 0.5;
     document.documentElement.scrollTop > GOLDEN_RATIO
       ? setIsScroll(true)
       : setIsScroll(false);
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollToTop);
     return () => {
       window.removeEventListener('scroll', handleScrollToTop);
     };
-  }, [handleScrollToTop]);
+  }, []);
 
   return (
-    <IconButton
-      type="button"
-      variant="scroll-to-top"
-      aria-label="Arrow up"
-      onClick={scrollToTop}
-      style={{ display: isScroll ? 'block' : 'none' }}
-    >
-      <CircleIcon width="30" height="30" />
-    </IconButton>
+    <div ref={startRef} id="header">
+      <IconButton
+        type="button"
+        variant="scroll-to-top"
+        aria-label="Arrow up"
+        onClick={scrollToTop}
+      >
+        <CircleIcon width="30" height="30" />
+      </IconButton>
+    </div>
   );
 };
 
