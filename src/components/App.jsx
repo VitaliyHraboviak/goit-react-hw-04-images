@@ -181,7 +181,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(INITIAL_STATE.currentPage);
   const [isLoading, setIsLoading] = useState(INITIAL_STATE.isLoading);
   const [showModal, setShowModal] = useState(INITIAL_STATE.showModal);
-  const [showScroll, setShowScroll] = useState(INITIAL_STATE.showScroll);
+  // const [showScroll, setShowScroll] = useState(INITIAL_STATE.showScroll);
   const [modalImg, setModalImg] = useState('');
   const [modalDescr, setModalDescr] = useState('');
   const [error, setError] = useState(INITIAL_STATE.error);
@@ -249,7 +249,7 @@ const App = () => {
     setCurrentPage(INITIAL_STATE.currentPage);
     setIsLoading(INITIAL_STATE.isLoading);
     setShowModal(INITIAL_STATE.showModal);
-    setShowScroll(INITIAL_STATE.showScroll);
+    // setShowScroll(INITIAL_STATE.showScroll);
     setError(INITIAL_STATE.error);
   };
 
@@ -279,7 +279,7 @@ const App = () => {
         <Modal onClick={toggleModal} modalImg={modalImg} modalDescr={modalDescr} />
       )}
 
-      {showScroll && images.length > 0 && !isLoading && <ScrollToTop />}
+      {/* {showScroll && images.length > 0 && !isLoading && <ScrollToTop />} */}
     </div>
   );
 };

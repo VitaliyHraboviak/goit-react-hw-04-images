@@ -33,50 +33,50 @@
 //   }
 // }
 
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { ReactComponent as CircleIcon } from '../Icons/circleUp.svg';
-import IconButton from '../Button/IconButton/IconButton';
+// import React, { useEffect, useState, useCallback, useRef } from 'react';
+// import { ReactComponent as CircleIcon } from '../Icons/circleUp.svg';
+// import IconButton from '../Button/IconButton/IconButton';
 
-const ScrollToTop = () => {
-  // const [setIsScroll] = useState(false);
-  const startRef = useRef(null);
-  // const scrollToRef = useRef(null);
+// const ScrollToTop = () => {
+//   // const [setIsScroll] = useState(false);
+//   const startRef = useRef(null);
+//   // const scrollToRef = useRef(null);
 
-  useEffect(() => {
-    scrollToRef.current = startRef.current.offsetTop;
-  }, []);
+//   useEffect(() => {
+//     scrollToRef.current = startRef.current.offsetTop;
+//   }, []);
 
-  const scrollToTop = () => {
-    const start = scrollToRef.current;
-    window.scrollTo({ top: start, behavior: 'smooth' });
-  };
+//   const scrollToTop = () => {
+//     const start = scrollToRef.current;
+//     window.scrollTo({ top: start, behavior: 'smooth' });
+//   };
 
-  const handleScrollToTop = useCallback(() => {
-    const GOLDEN_RATIO = 0.5;
-    document.documentElement.scrollTop > GOLDEN_RATIO
-      ? setIsScroll(true)
-      : setIsScroll(false);
-  }, []);
+//   const handleScrollToTop = useCallback(() => {
+//     const GOLDEN_RATIO = 0.5;
+//     document.documentElement.scrollTop > GOLDEN_RATIO
+//       ? setIsScroll(true)
+//       : setIsScroll(false);
+//   }, []);
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScrollToTop);
-    return () => {
-      window.removeEventListener('scroll', handleScrollToTop);
-    };
-  }, []);
+//   useEffect(() => {
+//     window.addEventListener('scroll', handleScrollToTop);
+//     return () => {
+//       window.removeEventListener('scroll', handleScrollToTop);
+//     };
+//   }, []);
 
-  return (
-    <div ref={startRef} id="header">
-      <IconButton
-        type="button"
-        variant="scroll-to-top"
-        aria-label="Arrow up"
-        onClick={scrollToTop}
-      >
-        <CircleIcon width="30" height="30" />
-      </IconButton>
-    </div>
-  );
-};
+//   return (
+//     <div ref={startRef} id="header">
+//       <IconButton
+//         type="button"
+//         variant="scroll-to-top"
+//         aria-label="Arrow up"
+//         onClick={scrollToTop}
+//       >
+//         <CircleIcon width="30" height="30" />
+//       </IconButton>
+//     </div>
+//   );
+// };
 
-export default ScrollToTop;
+// export default ScrollToTop;
